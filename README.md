@@ -15,7 +15,7 @@ CSS
 ### Set up and installation
 1. Clone this repository to a location in your file system;git clone https://github.com/Melby01/PITCHES
 2. Open terminal command line then navigate to the root folder of the application.cd Pitches-Project on your browser.
-3. Open index.htmlon your browser.
+3. Open it in your terminal.
 
 ### Contact information
 For more information or inquires feel free to contact me on my email or contact;
