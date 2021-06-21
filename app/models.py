@@ -40,10 +40,6 @@ class User(UserMixin,db.Model):
         return f'User {self.username}'
 
 
-
-
-
-
 class Role(db.Model):
     __tablename__ = 'roles'
 

@@ -4,14 +4,14 @@ from . import main
 from .forms import *
 from .. import db,photos
 from flask_login import login_required,current_user
-import markdown2 
-
+#import markdown2 
 
 @main.route('/')
 def index():
     '''
     View root page function that returns the index page and its data
     '''
+    
     title = 'Home - Choose your favorite pitch'
     return render_template('index.html', title = title)
 
@@ -61,13 +61,13 @@ def update_pic(uname):
 @login_required
 def new_comment(id):
     form = CommentForm()
-    pitch= get_pitch(id)
+    pitch= Pitches(id)
     if form.validate_on_submit():
         title = form.title.data
         comment = form.comment.data
 
         # Updated comment instance
-        new_comment = Comment(pitch_id=pitch.id,pitch_title=title,image_path=pitch.poster,pitch_comment=comment,user=current_user)
+        new_comment = Comments(pitch_id=pitch.id,pitch_title=title,image_path=pitch.poster,pitch_comment=comment,user=current_user)
 
         # save comment method
         new_comment.save_comment()
@@ -110,12 +110,10 @@ def new_pitch():
 
     return render_template('pitch.html',form= form)
 
-
-
 @main.route('/comment/<int:id>')
 def single_comment(id):
-    comment=Comment.query.get(id)
+    comment=Comments.query.get(id)
     if comment is None:
         abort(404)
-    format_comment = markdown2.markdown(comment.pitch_comment,extras=["code-friendly", "fenced-code-blocks"])
-    return render_template('comment.html',comment = comment,format_comment=format_comment)
+#format_comment = markdown2.markdown(comment.pitch_comment,extras=["code-friendly", "fenced-code-blocks"])
+    return render_template('comment.html',comment = comment)
